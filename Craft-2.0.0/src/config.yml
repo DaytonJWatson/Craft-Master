@@ -1,0 +1,18 @@
+discordInvite: 'update this in the config.yml'
+uptime: '2024-05-20 12:00:00'
+unique: 1
+discordBot:
+  serverAddress: 'http://184.167.166.53:8080'
+  chatChannel: 1243326774356607026
+  reportPlayerChannel: 1242577344909152286
+  reportGriefChannel: 1243316999401111602
+
+disabledMobs:
+  - none
+  # disable mobs here, if theyre causing server crashes
+
+treeChop:
+  enabled: true
+  reduceDurability: true
+  treeCheckRadius: 7
+  decayDepthLimit: 7

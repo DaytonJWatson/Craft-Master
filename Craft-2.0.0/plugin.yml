@@ -1,0 +1,89 @@
+name: Craft
+author: WatsonLLC
+description: PiServer custom spigot plugin
+version: 2.0.0
+api-version: '1.21'
+depend: [CraftEconomy]
+main: com.watsonllc.craft.Main
+commands:
+  ahelp:
+    description: Displays the admin help menu
+  ban:
+    description: Ban a player from the server
+  bed:
+    description: Teleport to your respawn location
+  craftingtable:
+    description: Opens a crafting table
+    aliases: [workbench]
+  craftreload:
+    description: Reloads the data files
+  discord:
+    description: Displays a discord invite link
+  enderchest:
+    description: Opens selected ender chest
+    aliases: [ec]
+  feed:
+    description: Feeds the player
+  fly:
+    description: Toggle flight
+  god:
+    description: Makes the player invulnerable
+  groups:
+    description: Manage a players group
+  hardmode:
+    description: Toggle local difficulty to HARD
+    aliases: [hard]
+  heal:
+    description: Heals the player
+  help:
+    description: Displays the help menu
+  home:
+    description: Teleport to your home location
+  delhome:
+    description: Delete your home location
+  sethome:
+    description: Set your home location
+  hunt:
+    description: Control the scavenger hunt
+  invsee:
+    description: View a players inventory
+  kick:
+    description: Kick a player from the server
+  nickname:
+    description: Change your nickname
+  mute:
+    description: Mute the specified player
+  unmute:
+    description: Unmute the specified player
+  peaceful:
+    description: Toggle local difficulty to PEACEFUL
+  pvp:
+    description: Toggle PvP damage
+  rtp:
+    description: Teleport to a random location
+  report:
+    description: Report activity on the server
+  rules:
+    description: Displays the server rules
+  setspawn:
+    description: Set the server spawn location
+  spawn:
+    description: Teleport to the spawn location
+  specs:
+    description: Displays server hardware information
+  spectate:
+    description: Change your GameMode to Spectator
+  suicide:
+    description: Kills the player
+  tpa:
+    description: Request to teleport to a player
+  tpaccept:
+    description: Accept a teleport request from a player
+  tpdeny:
+    description: Deny a teleport request from a player
+  unban:
+    description: Unbans the specified player
+  warn:
+    description: Warn a player
+  vanish:
+    description: Hide from players sight
