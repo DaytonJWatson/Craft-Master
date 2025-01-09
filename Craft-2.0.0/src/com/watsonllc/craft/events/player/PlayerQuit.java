@@ -13,7 +13,7 @@ public class PlayerQuit implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        handlePlayerQuit(event);
+    	handlePlayerQuit(event);
     }
 
     /**

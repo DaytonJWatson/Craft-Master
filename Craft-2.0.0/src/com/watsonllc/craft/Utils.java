@@ -3,9 +3,13 @@ package com.watsonllc.craft;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,6 +33,21 @@ public class Utils {
 	    }
 	    return ChatColor.translateAlternateColorCodes('&', s);
 	}
+	
+	/**
+     * Translates alternate color codes for each string in a list.
+     *
+     * @param list The list of strings with color codes.
+     * @return A new list with formatted strings or an empty list if null.
+     */
+    public static List<String> color(List<String> list) {
+        if (list == null || list.isEmpty()) {
+            return List.of();  // Return an empty list if null or empty
+        }
+        return list.stream()
+                   .map(Utils::color)
+                   .collect(Collectors.toList());
+    }
 
     /**
      * Creates an ItemStack with the specified material, amount, and display name.
@@ -94,4 +113,13 @@ public class Utils {
             }
         }.runTaskLater(Main.instance, 60); // 60 ticks = 3 seconds
     }
+    
+	public static final EnumSet<EntityType> HOSTILE_MOBS = EnumSet.of(
+            EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER,
+            EntityType.CREEPER, EntityType.ENDERMAN, EntityType.WITCH,
+            EntityType.BLAZE, EntityType.GHAST, EntityType.SLIME,
+            EntityType.MAGMA_CUBE, EntityType.HUSK, EntityType.STRAY,
+            EntityType.DROWNED, EntityType.PHANTOM, EntityType.CREAKING,
+            EntityType.WARDEN
+    );
 } 

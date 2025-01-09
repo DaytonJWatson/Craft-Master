@@ -9,7 +9,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.watsonllc.craft.commands.Commands;
 import com.watsonllc.craft.config.Config;
 import com.watsonllc.craft.events.Events;
+import com.watsonllc.craft.logic.AdaptiveDifficulty;
 import com.watsonllc.craft.logic.Announcer;
+import com.watsonllc.craft.logic.BloodMoon;
+import com.watsonllc.craft.logic.NameTags;
 import com.watsonllc.craft.logic.RestartWarning;
 
 /**
@@ -57,8 +60,8 @@ public class Main extends JavaPlugin {
         version = Main.instance.getDescription().getVersion();
 
         // Load the main world and nether world
-        world = getServer().getWorld("world");
-        netherWorld = getServer().getWorld("world_nether");
+        world = getServer().getWorlds().get(0);
+        netherWorld = getServer().getWorld(world.getName()+ "_nether");
 
         // Initialize commands, configurations, and events
         Commands.setup();
@@ -68,5 +71,23 @@ public class Main extends JavaPlugin {
         // Start background tasks for announcements and restart warnings
         Announcer.startBroadcastTask();
         RestartWarning.startRestartWarningTask();
+        
+        // Start BloodMoon
+        if(Config.getBoolean("bloodMoon.enabled"))
+        	BloodMoon.initialize();
+        
+        // Start the potentially super laggy no nametags
+        if(Config.getBoolean("nameTags.enabled"))
+        	NameTags.initialize();
+    
+        AdaptiveDifficulty.startDifficultyTimer();
     }
+    
+	public static void warning(String string) {
+		instance.getLogger().warning(string);
+	}
+	
+	public static void debug(String string) {
+		instance.getLogger().info(string);
+	}
 }

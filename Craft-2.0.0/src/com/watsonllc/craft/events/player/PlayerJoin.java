@@ -12,6 +12,7 @@ import com.watsonllc.craft.Main;
 import com.watsonllc.craft.Utils;
 import com.watsonllc.craft.config.Config;
 import com.watsonllc.craft.config.PlayerData;
+import com.watsonllc.craft.logic.AdaptiveDifficulty;
 import com.watsonllc.craft.logic.DiscordBot;
 import com.watsonllc.craft.logic.Spawn;
 
@@ -38,7 +39,7 @@ public class PlayerJoin implements Listener {
         }
 
         Player player = event.getPlayer();
-
+        
         if (!player.hasPlayedBefore()) {
             newPlayer(player);
         }
@@ -46,6 +47,7 @@ public class PlayerJoin implements Listener {
         existingPlayer(event, player);
         setHeader(player);
         DiscordBot.joinMessage(event);
+        AdaptiveDifficulty.onPlayerJoin(event);
     }
 
     /**

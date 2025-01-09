@@ -104,7 +104,7 @@ public class TreeChop {
     }
 
     /**
-     * Breaks the entire tree starting from the given block.
+     * Breaks the entire tree starting from the given block, excluding dirt or unrelated blocks.
      *
      * @param block The starting block.
      * @return The number of logs broken.
@@ -114,7 +114,9 @@ public class TreeChop {
         findLogs(block, logs);
 
         for (Block log : logs) {
-            log.breakNaturally();
+            if (isLog(log.getType())) { // Ensure only logs are broken
+                log.breakNaturally();
+            }
         }
 
         accelerateLeafDecay(logs, DECAY_DEPTH_LIMIT);

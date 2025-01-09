@@ -60,6 +60,17 @@ public class PlayerData {
     public static Object get(String path) {
         return playerData.get(path);
     }
+    
+    /**
+     * Retrieves an integer value from the player data, or returns a default value if not present.
+     *
+     * @param path The path to the data.
+     * @param defaultValue The default value to return if the path does not exist.
+     * @return The integer value at the specified path, or the default value.
+     */
+    public static int getIntOrDefault(String path, int defaultValue) {
+        return playerData.contains(path) ? playerData.getInt(path) : defaultValue;
+    }
 
     /**
      * Retrieves a string from the player data and applies color formatting.
@@ -77,8 +88,8 @@ public class PlayerData {
      * @param player The player whose difficulty is being queried.
      * @return The difficulty level as a string.
      */
-    public static String getDifficulty(Player player) {
-        return playerData.getString("playerData." + player.getUniqueId().toString() + ".difficulty");
+    public static int getDifficulty(Player player) {
+        return playerData.getInt("playerData." + player.getUniqueId().toString() + ".difficulty");
     }
 
     /**
@@ -151,7 +162,8 @@ public class PlayerData {
         String PATH = "playerData." + UUID + ".";
         set(PATH + "username", player.getName());
         set(PATH + "group", "default");
-        set(PATH + "difficulty", "NORMAL");
+        set(PATH + "difficulty", 0);
+        set(PATH + "nametags", true);  // Default nametags to enabled
         save();
     }
 
@@ -248,5 +260,31 @@ public class PlayerData {
     public static String getMuteReason(String uuid) {
         String PATH = "playerData." + uuid + ".muted.reason";
         return playerData.getString(PATH, "No reason specified.");
+    }
+    
+    /**
+     * Enables or disables nametags for the specified player.
+     *
+     * @param player  The player whose nametags setting is being updated.
+     * @param enabled true to enable nametags, false to disable them.
+     */
+    public static void setNameTagsEnabled(Player player, boolean enabled) {
+        String UUID = player.getUniqueId().toString();
+        String PATH = "playerData." + UUID + ".nametags";
+        set(PATH, enabled);
+        save();
+        Main.instance.getLogger().info("Nametags for " + player.getName() + " set to: " + enabled);
+    }
+    
+    /**
+     * Checks if nametags are enabled for the specified player.
+     *
+     * @param player The player to check.
+     * @return true if nametags are enabled, false otherwise.
+     */
+    public static boolean isNameTagsEnabled(Player player) {
+        String UUID = player.getUniqueId().toString();
+        String PATH = "playerData." + UUID + ".nametags";
+        return playerData.getBoolean(PATH, true); // Default to true if not set
     }
 }

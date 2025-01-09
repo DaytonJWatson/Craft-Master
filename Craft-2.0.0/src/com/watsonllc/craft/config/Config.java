@@ -121,6 +121,10 @@ public class Config {
     public static String getString(String path) {
         return Utils.color(Main.instance.getConfig().getString(path));
     }
+    
+	public static List<String> getStringList(String path) {
+		return Main.instance.getConfig().getStringList(path);
+	}
 
     /**
      * Retrieves an integer value from the configuration.

@@ -59,7 +59,6 @@ public class Announcer {
         Bukkit.broadcastMessage(Utils.color("&fAnnouncement &7>> &f" + message));
     }
 
-
     /**
      * Generates messages that rely on dynamic server data, such as uptime and player counts.
      * 

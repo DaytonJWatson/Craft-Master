@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import com.watsonllc.craft.Utils;
+import com.watsonllc.craft.logic.AdaptiveDifficulty;
 import com.watsonllc.craft.logic.DiscordBot;
 
 public class PlayerDeath implements Listener {
@@ -24,6 +25,8 @@ public class PlayerDeath implements Listener {
         if (!(event.getEntity() instanceof Player)) {
             return;
         }
+        
+        AdaptiveDifficulty.onPlayerDeath(event);
 
         DiscordBot.deathMessage(event);
         event.setDeathMessage(Utils.color("&c" + event.getDeathMessage()));

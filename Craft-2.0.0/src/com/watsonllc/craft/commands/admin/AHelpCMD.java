@@ -61,11 +61,11 @@ public class AHelpCMD implements CommandExecutor, TabCompleter {
 			sendCmdHelp("groups", " &8[&7set&8] &8<&7player&8>", "craft.groups");
 			sendCmdHelp("heal", " &8<&7player&8>", "craft.heal");
 			sendCmdHelp("invsee", " &8<&7player&8>", "craft.invsee");
-			sendCmdHelp("kick", " &8[&7player&8] <&7reason&8>", "craft.kick");
 			return;
 		}
 
 		if(page >= totalPages) {
+			sendCmdHelp("kick", " &8[&7player&8] <&7reason&8>", "craft.kick");
 			sendCmdHelp("mute", " &8[&7player&8] <&7reason&8>", "craft.mute");
 			sendCmdHelp("setspawn", "", "craft.setspawn");
 			sendCmdHelp("spectate", "", "craft.spectate");

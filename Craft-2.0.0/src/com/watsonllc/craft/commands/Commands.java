@@ -31,6 +31,7 @@ import com.watsonllc.craft.commands.player.RandomTeleportCMD;
 import com.watsonllc.craft.commands.player.ReportCMD;
 import com.watsonllc.craft.commands.player.RulesCMD;
 import com.watsonllc.craft.commands.player.SetHomeCMD;
+import com.watsonllc.craft.commands.player.SettingsCMD;
 import com.watsonllc.craft.commands.player.SpawnCMD;
 import com.watsonllc.craft.commands.player.SpecsCMD;
 import com.watsonllc.craft.commands.player.SuicideCMD;
@@ -60,7 +61,6 @@ public class Commands {
 		Main.instance.getCommand("unban").setExecutor(new UnbanCMD());
 		Main.instance.getCommand("warn").setExecutor(new WarnCMD());
 		Main.instance.getCommand("vanish").setExecutor(new VanishCMD());
-		
 		Main.instance.getCommand("bed").setExecutor(new BedCMD());
 		Main.instance.getCommand("bed").setTabCompleter(new BedCMD());
 		Main.instance.getCommand("discord").setExecutor(new DiscordCMD());
@@ -90,5 +90,8 @@ public class Commands {
 		Main.instance.getCommand("tpa").setExecutor(new TpaCMD());
 		Main.instance.getCommand("tpaccept").setExecutor((sender, command, label, args) -> new TpaCMD().onTpacceptCommand(sender));
 		Main.instance.getCommand("tpdeny").setExecutor((sender, command, label, args) -> new TpaCMD().onTpdenyCommand(sender));
+		
+		// fix these
+		Main.instance.getCommand("settings").setExecutor(new SettingsCMD());
 	}
 }

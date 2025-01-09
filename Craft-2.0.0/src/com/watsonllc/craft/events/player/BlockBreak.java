@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import com.watsonllc.craft.logic.AdaptiveDifficulty;
 import com.watsonllc.craft.logic.TreeChop;
 
 public class BlockBreak implements Listener {
@@ -13,5 +14,6 @@ public class BlockBreak implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
     	tc.logic(event);
+    	AdaptiveDifficulty.onBlockBreak(event);
     }
 }

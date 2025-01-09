@@ -4,6 +4,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import com.watsonllc.craft.customitems.BloodMoonMace;
 import com.watsonllc.craft.logic.PVP;
 
 /**
@@ -20,6 +22,8 @@ public class EntityDamageByEntity implements Listener {
      */
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+    	BloodMoonMace.attributes(event);
+    	
         // Ensure both entities involved are players
         if (!(event.getEntity() instanceof Player victim && event.getDamager() instanceof Player attacker)) {
             return;

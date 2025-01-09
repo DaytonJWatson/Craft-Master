@@ -30,9 +30,6 @@ commands:
     description: Makes the player invulnerable
   groups:
     description: Manage a players group
-  hardmode:
-    description: Toggle local difficulty to HARD
-    aliases: [hard]
   heal:
     description: Heals the player
   help:
@@ -43,8 +40,6 @@ commands:
     description: Delete your home location
   sethome:
     description: Set your home location
-  hunt:
-    description: Control the scavenger hunt
   invsee:
     description: View a players inventory
   kick:
@@ -55,8 +50,6 @@ commands:
     description: Mute the specified player
   unmute:
     description: Unmute the specified player
-  peaceful:
-    description: Toggle local difficulty to PEACEFUL
   pvp:
     description: Toggle PvP damage
   rtp:
@@ -67,6 +60,8 @@ commands:
     description: Displays the server rules
   setspawn:
     description: Set the server spawn location
+  settings:
+    description: Open adaptive player settings
   spawn:
     description: Teleport to the spawn location
   specs:
