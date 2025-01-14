@@ -30,7 +30,11 @@ public class RTP {
     public static boolean teleport(Player player, int max, int min) {
         player.sendMessage(Utils.color("&6Looking for a safe location..."));
         long currentTime = System.currentTimeMillis();
-        Location randomLocation = getRandomSafeLocation(player.getWorld().getSpawnLocation(), max, min);
+        Location randomLocation = getRandomSafeLocation(Main.world.getSpawnLocation(), max, min);
+        
+        if(Spawn.location() != null) {
+        	randomLocation = getRandomSafeLocation(Spawn.location(), max, min);
+        }
 
         if (randomLocation != null) {
             player.teleport(randomLocation.add(0, 1, 0));
@@ -54,6 +58,25 @@ public class RTP {
         long currentTime = System.currentTimeMillis();
         return !Main.lastTeleportTime.containsKey(playerUUID) ||
                (currentTime - Main.lastTeleportTime.get(playerUUID) >= COOLDOWN_TIME);
+    }
+    
+    /**
+     * Checks how much cooldown time is left for the player.
+     *
+     * @param player The player to check.
+     * @return Remaining cooldown time in milliseconds, or 0 if the player can teleport.
+     */
+    public static long getCooldownTime(Player player) {
+        UUID playerUUID = player.getUniqueId();
+        long currentTime = System.currentTimeMillis();
+        if (Main.lastTeleportTime.containsKey(playerUUID)) {
+            long lastTeleport = Main.lastTeleportTime.get(playerUUID);
+            long timePassed = currentTime - lastTeleport;
+            if (timePassed < COOLDOWN_TIME) {
+                return COOLDOWN_TIME - timePassed;
+            }
+        }
+        return 0;
     }
 
     /**

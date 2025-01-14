@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -38,7 +39,7 @@ public class TreeChop {
         Block block = event.getBlock();
         ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
 
-        if (!event.getPlayer().hasPermission("qol.treeChop")) return;
+        if (!event.getPlayer().hasPermission("craft.treeChop")) return;
         if (event.getPlayer().isSneaking()) return;
         if (!isAxe(tool.getType())) return;
         if (!isLog(block.getType())) return;
@@ -46,7 +47,7 @@ public class TreeChop {
 
         int brokenLogs = breakTree(block);
 
-        if (REDUCE_DURABILITY) {
+        if (REDUCE_DURABILITY && event.getPlayer().getGameMode() == GameMode.SURVIVAL) {
             reduceAxeDurability(tool, brokenLogs);
         }
     }
@@ -172,8 +173,16 @@ public class TreeChop {
 
     private void reduceAxeDurability(ItemStack tool, int amount) {
         if (tool.getItemMeta() instanceof Damageable damageable) {
-            damageable.setDamage(damageable.getDamage() + amount);
+            int currentDamage = damageable.getDamage();
+            int maxDurability = tool.getType().getMaxDurability();
+            int newDamage = Math.min(currentDamage + amount, maxDurability);
+
+            damageable.setDamage(newDamage);
             tool.setItemMeta((ItemMeta) damageable);
+
+            if (newDamage >= maxDurability) {
+                tool.setAmount(0);
+            }
         }
     }
 }

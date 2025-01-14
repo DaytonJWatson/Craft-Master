@@ -1,5 +1,8 @@
 package com.watsonllc.craft.events.player;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,6 +17,7 @@ import com.watsonllc.craft.config.Config;
 import com.watsonllc.craft.config.PlayerData;
 import com.watsonllc.craft.logic.AdaptiveDifficulty;
 import com.watsonllc.craft.logic.DiscordBot;
+import com.watsonllc.craft.logic.JackMode;
 import com.watsonllc.craft.logic.Spawn;
 
 public class PlayerJoin implements Listener {
@@ -21,6 +25,8 @@ public class PlayerJoin implements Listener {
     private String header;
     private String joined;
     private String newJoin;
+    
+    public static HashMap<UUID, Long> recentJoins = new HashMap<>();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -48,6 +54,8 @@ public class PlayerJoin implements Listener {
         setHeader(player);
         DiscordBot.joinMessage(event);
         AdaptiveDifficulty.onPlayerJoin(event);
+        
+        JackMode.handleJoin(event);
     }
 
     /**
@@ -99,6 +107,9 @@ public class PlayerJoin implements Listener {
         starterKit(player);
         Bukkit.broadcastMessage(newJoin);
 
+        recentJoins.put(player.getUniqueId(), System.currentTimeMillis());
+        Bukkit.getScheduler().runTaskLater(Main.instance, () -> recentJoins.remove(player.getUniqueId()), 200L);
+        
         if (!Spawn.isNull()) {
             player.teleport(Spawn.location());
         }
@@ -127,7 +138,7 @@ public class PlayerJoin implements Listener {
         ItemStack axe = Utils.item(Material.STONE_AXE, 1, "&6Starter Axe");
         ItemStack shovel = Utils.item(Material.STONE_SHOVEL, 1, "&6Starter Shovel");
         ItemStack food = Utils.item(Material.GOLDEN_CARROT, 8, "&6Starter Food");
-        ItemStack ticket = Utils.item(Material.PAPER, 1, "&6Ticket #" + Config.getInt("unique"), Utils.color("&cDont lose this!"));
+        ItemStack ticket = Utils.item(Material.PAPER, 1, "&6Ticket #" + Config.getInt("unique"), Utils.color("&cDont lose this! &7This item can be exchanged for rewards"));
         ItemStack claimTool = Utils.item(Material.PAPER, 1, Utils.color("&bClaim How-to"),
                 Utils.color("&7Select two boundaries with the &aClaim Tool"),
                 Utils.color("&cClaims do not extend from the top to bottom of map automatically,"),

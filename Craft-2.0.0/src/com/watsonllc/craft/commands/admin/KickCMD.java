@@ -50,7 +50,7 @@ public class KickCMD implements CommandExecutor {
             reason = sb.toString().trim();
         }
         
-        target.kickPlayer(Utils.color("&cYou have been kicked from the server. Reason: "+ reason));
+        target.kickPlayer(Utils.color("&cYou have been kicked from the server. \n &7Reason: &c"+ reason));
         Bukkit.broadcastMessage(Utils.color("&c" + target.getName() + " was kicked by " + player.getName() + (reason.isEmpty() ? "" : " for: " + reason)));
         
         return true;

@@ -27,7 +27,6 @@ public class PlayerDeath implements Listener {
         }
         
         AdaptiveDifficulty.onPlayerDeath(event);
-
         DiscordBot.deathMessage(event);
         event.setDeathMessage(Utils.color("&c" + event.getDeathMessage()));
     }

@@ -45,7 +45,7 @@ public class BanCMD implements CommandExecutor {
             return true;
         }
 
-        String reason = "Banned by an administrator.";
+        String reason = "Banned by an administrator";
         if (args.length > 1) {
             StringBuilder sb = new StringBuilder();
             for (int i = 1; i < args.length; i++) {
@@ -62,7 +62,7 @@ public class BanCMD implements CommandExecutor {
         PlayerData.set(path + ".bannedBy", player.getName());
 
         // Kick the player
-        target.kickPlayer(Utils.color("&cYou have been banned from the server. Reason: " + reason + ". You can appeal your ban on discord: " + discordInvite));
+        target.kickPlayer(Utils.color("&cYou have been banned from the server. \n &7Reason: &c" + reason + ". \n &7You can appeal your ban on Discord: &f" + discordInvite + "\n \n &6Thank you for playing Craft!"));
         Bukkit.broadcastMessage(Utils.color("&c" + target.getName() + " was banned by " + player.getName() + (reason.isEmpty() ? "" : " for: " + reason)));
         
         DiscordBot.sendMessage(target.getName() + " was banned by " + player.getName() + (reason.isEmpty() ? "" : " for: " + reason), "chat");

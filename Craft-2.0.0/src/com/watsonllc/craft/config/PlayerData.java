@@ -163,6 +163,8 @@ public class PlayerData {
         set(PATH + "username", player.getName());
         set(PATH + "group", "default");
         set(PATH + "difficulty", 0);
+        set(PATH + "damage", 1);
+        set(PATH + "health", 20);
         set(PATH + "nametags", true);  // Default nametags to enabled
         save();
     }

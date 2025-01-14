@@ -27,32 +27,37 @@ public class RandomTeleportCMD implements CommandExecutor, TabCompleter {
 		}
 
 		if (!RTP.canTeleport(player)) {
-			player.sendMessage(Utils.color("&cYou cant do that right now"));
-			return false;
+		    long cooldownTimeLeft = RTP.getCooldownTime(player);
+		    long seconds = cooldownTimeLeft / 1000;
+		    long minutes = seconds / 60;
+		    seconds %= 60;
+
+		    player.sendMessage(Utils.color("&cYou can't teleport right now. Please wait &6" +
+		            (minutes > 0 ? minutes + " minute" + (minutes > 1 ? "s" : "") + " and " : "") +
+		            seconds + " second" + (seconds != 1 ? "s" : "")));
+		    return false;
 		}
 		
 		// rtp <distance>
 		if (args.length == 1 && player.hasPermission("craft.rtp.distance")) {
 			if (!isInt(args[0]) || Integer.parseInt(args[0]) <= 225 || Integer.parseInt(args[0]) > 50000) {
-				player.sendMessage(Utils.color("&cInvalid distance [Max: 50,000 | Min: 226 | Default: 1,000]"));
+				player.sendMessage(Utils.color("&cInvalid distance [Max: 50,000 | Min: 225 | Default: 1,000]"));
 				return false;
 			}
 			if (RTP.teleport(player, Integer.parseInt(args[0]), 225)) {
-				player.sendMessage(Utils.color("&6You paid $100 for Custom RTP [Distance: "+ args[0]+"]"));
+				return true;
 			}
 			return false;
 		}
 
 		if (args.length == 0) {
 			if (RTP.teleport(player, 1000, 225)) {
-				player.sendMessage(Utils.color("&6You paid $50 for RTP"));
+				return true;
 			} else
 				return false;
-			return false;
 		}
 
 		player.sendMessage(Utils.color("&7/&crtp &7<&cmax-distance&7>"));
-
 		return false;
 	}
 

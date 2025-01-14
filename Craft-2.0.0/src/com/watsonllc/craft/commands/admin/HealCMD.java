@@ -24,6 +24,7 @@ public class HealCMD implements CommandExecutor {
 		
 		if(args.length == 0) {
 			player.setHealth(20);
+			player.setFoodLevel(20);
 			player.sendMessage(Utils.color("&6You have been healed"));
 			return false;
 		}
@@ -37,7 +38,7 @@ public class HealCMD implements CommandExecutor {
 			}
 			
 			target.setHealth(20);
-			target.setHealth(20);
+			target.setFoodLevel(20);
 			target.sendMessage(Utils.color("&6You have been healed"));
 			player.sendMessage(Utils.color("&6You have healed "+ target.getName()));
 		}

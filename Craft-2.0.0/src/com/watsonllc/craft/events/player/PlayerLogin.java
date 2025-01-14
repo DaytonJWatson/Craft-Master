@@ -30,7 +30,7 @@ public class PlayerLogin implements Listener {
 
         if (PlayerData.isBanned(player.getUniqueId().toString())) {
             String reason = PlayerData.getString("playerData." + player.getUniqueId().toString() + ".banned.reason");
-            event.disallow(Result.KICK_BANNED, Utils.color("&cYou have been banned from this server. Reason: " + reason + ". You can appeal your ban on discord: " + discordInvite));
+            event.disallow(Result.KICK_BANNED, Utils.color("&cYou have been banned from this server. \n &7Reason: &c" + reason + ". \n &7You can appeal your ban on Discord: &f" + discordInvite + "\n \n &6Thank you for playing Craft!"));
         }
     }
 }

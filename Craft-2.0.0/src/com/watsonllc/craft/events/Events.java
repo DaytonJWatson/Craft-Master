@@ -17,10 +17,10 @@ import com.watsonllc.craft.events.player.PlayerDeath;
 import com.watsonllc.craft.events.player.PlayerExpChange;
 import com.watsonllc.craft.events.player.PlayerJoin;
 import com.watsonllc.craft.events.player.PlayerLogin;
-import com.watsonllc.craft.events.player.PlayerMove;
 import com.watsonllc.craft.events.player.PlayerQuit;
 import com.watsonllc.craft.events.player.PlayerRespawn;
 import com.watsonllc.craft.events.server.ServerPing;
+import com.watsonllc.craft.logic.JackMode;
 
 /**
  * Handles the registration of all event listeners within the plugin.
@@ -53,11 +53,12 @@ public class Events {
         pm.registerEvents(new PlayerExpChange(), Main.instance);
         pm.registerEvents(new PlayerJoin(), Main.instance);
         pm.registerEvents(new PlayerLogin(), Main.instance);
-        pm.registerEvents(new PlayerMove(), Main.instance);
         pm.registerEvents(new PlayerQuit(), Main.instance);
         pm.registerEvents(new PlayerRespawn(), Main.instance);
 
         // Register server-related event listeners
         pm.registerEvents(new ServerPing(), Main.instance);
+        
+        pm.registerEvents(new JackMode(), Main.instance);
     }
 }
